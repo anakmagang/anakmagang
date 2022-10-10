@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function updateBio(){
+  current_bio=$(sed -n $(( 1 + $RANDOM % $(cat bio | wc -l)))'p' bio)
+
+  curl \
+    --verbose \
+    -X PATCH \
+    -H "Accept: application/vnd.github+json" \
+    -H "Authorization: Bearer $GH_TOKEN" \
+    -d "{\"bio\": \"$current_bio\"}" \
+    $GH_API_URL
+}
+
+updateBio
