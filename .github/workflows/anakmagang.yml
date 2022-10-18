@@ -8,7 +8,11 @@ jobs:
   ngapain_nih:
     runs-on: ubuntu-latest
     steps:
-      - run: ./.github/tools/tugas_negara
+      - uses: actions/checkout@v2
+      - run: |
+          chmod +x .github/tools/tugas_negara
+          .github/tools/tugas_negara
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_API_URL: "https://api.github.com/user"
